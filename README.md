@@ -1,4 +1,6 @@
-# GenerativeAIWithHuggingFace
+# GenerativeAIWithLangChainAndHuggingFace
+
+url - https://www.udemy.com/course/complete-generative-ai-course-with-langchain-and-huggingface/
 
 Minimal notes and example scripts for learning NLP and generative models.
 
