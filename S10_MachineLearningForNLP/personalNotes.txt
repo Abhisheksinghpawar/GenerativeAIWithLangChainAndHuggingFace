@@ -1,0 +1,92 @@
+===============
+ROADMAP FOR NLP
+===============
+
+1) Foundations
+    - Core libraries: NLTK, spaCy, scikit-learn
+    - Basics: Python, data handling, evaluation metrics
+
+2) Text Preprocessing (Cleaning & normalization)
+    - Tokenization: paragraph → sentences → words
+    - Lowercasing, punctuation removal, normalization
+    - Stopword removal, stemming vs. lemmatization
+    - Handling rare words, misspellings, and normalization
+
+3) Classical Feature Extraction
+    - Bag of Words (BoW): simple count vectors
+    - TF–IDF: importance-weighted features
+    - n-grams: unigrams, bigrams (and higher-order n-grams)
+
+4) Word Embeddings (Dense representations)
+    - Word2Vec, GloVe, FastText
+    - Averaging word vectors for sentence-level features
+    - Contextual embeddings (intro): ELMo, contextualized representations
+
+5) Deep Learning for Sequences
+    - RNN basics and limitations
+    - LSTM and GRU: handling long-range dependencies
+    - Use cases: sequence classification, tagging, generation
+
+6) Transformers & Attention
+    - Transformer architecture: self-attention, positional encodings
+    - Encoder/decoder usage for different tasks
+
+7) Pretrained Models & Fine-tuning
+    - BERT and variants (RoBERTa, DistilBERT, etc.)
+    - Fine-tune for classification, NER, QA, summarization
+
+8) Common NLP Tasks / Applications
+    - Text classification, sentiment analysis
+    - Named Entity Recognition (NER)
+    - Machine translation, summarization, question answering
+
+9) Practical Learning Path (suggested)
+    - Practice preprocessing and feature extraction on small datasets
+    - Train classical models (logistic regression, SVM) with TF–IDF
+    - Train simple word2vec, experiment with embeddings
+    - Build RNN/LSTM classifier, then try Transformer-based fine-tuning
+    - Apply models to a small end-to-end project (text classifier or NER)
+
+10) Resources
+    - Tutorials: official spaCy, TensorFlow, PyTorch docs
+    - Papers: "Attention Is All You Need", BERT paper
+    - Libraries: Hugging Face Transformers for pretrained models
+
+Keep this as a living roadmap — add links, project ideas, and notes.
+
+===================
+TOKENIZATION IN NLP
+===================
+
+Corpus - Paragraph
+Documents - Sentence
+Vocabulary - Unique words in the paragraph
+Words - All words in a Corpus
+
+Tokenization - 
+
+"My name is Abhishek and I have a interst in teching ML, NLP and DL. I am also a youtuber"
+
+    - This whole is a Corpus
+
+Tokens {Sentences or documents}
+
+Simple process in which paragraph is converted to sentences. Looks for fulls top and exclaimation
+
+     - My name is Abhishek and I have a interst in teaching ML, NLP and DL
+     - I am also a youtuber
+
+Words can also be a token - Sentences can also be a token
+
+Vocabulary - Unique words
+
+"I like to drink apple juice. My friend likes mango juice"
+
+Perform Tokenization (Sentences)
+
+I like to drink apple juice
+My friend likes mango juice
+
+    Total 11 words
+    Unique 10 words
+
