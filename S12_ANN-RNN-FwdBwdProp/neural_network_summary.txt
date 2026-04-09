@@ -1,0 +1,45 @@
+# Neural Network Interview Summary
+
+## 1. ANN (Artificial Neural Network)
+- ANN is a network of interconnected artificial neurons that learn patterns by adjusting weights.
+- Structure: Input layer → Hidden layers → Output layer.
+- Each neuron computes z = w·x + b, then applies an activation function.
+- Learns using forward propagation and backpropagation.
+- Used for classification, regression, and as the base for CNNs, RNNs, etc.
+
+## 2. RNN (Recurrent Neural Network)
+- RNNs are designed for sequential data and maintain memory using hidden states.
+- Formula: h_t = f(Wx_t + Uh_{t-1} + b).
+- Used in NLP, speech recognition, time-series forecasting.
+- Suffers from vanishing gradients; LSTM/GRU solve this.
+
+## 3. Forward Propagation
+- Process of passing input through the network to compute output.
+- Steps: weighted sum → activation → next layer → final output.
+- No learning happens here; used to compute predictions and loss.
+
+## 4. Backward Propagation
+- Learning process where gradients of loss w.r.t weights are computed.
+- Uses chain rule to propagate error backward.
+- Updates weights: w = w - η * dL/dw.
+- Works with optimizers like SGD, Adam.
+
+## 5. Activation Function
+- A function applied to z = w·x + b to introduce non-linearity.
+- Without activation, network becomes a linear model.
+- Types: ReLU, Sigmoid, Tanh, Softmax.
+- ReLU is most common in hidden layers; Softmax for multi-class output.
+
+## 6. Why Bias is Needed
+- Bias allows shifting the activation curve; adds flexibility.
+- Prevents neuron from being forced through origin.
+- Acts as default activation even when inputs are zero.
+- Bias is a learnable parameter updated during training.
+
+## Key Interview Points
+- ANN: basic building block, learns nonlinear patterns.
+- RNN: handles sequences, maintains memory.
+- Forward Prop: computes output.
+- Backprop: updates weights, learning happens here.
+- Activation: adds non-linearity, essential for deep learning.
+- Bias: improves model flexibility and accuracy.

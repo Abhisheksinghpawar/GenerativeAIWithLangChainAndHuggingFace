@@ -189,3 +189,103 @@ print(sentences)
 • 	Snowball Stemmer is generally better than Porter.
 • 	Lemmatization requires POS tags for best results.
 '''
+
+paragraph = """I have three visions for India. In 3000 years of our history, people from all over the world have come and invaded us, captured our lands, conquered our minds. From Alexander onwards. 
+The Greeks, the Portuguese, the British, the French, the Dutch, all of them came and looted us, took over what was ours. Yet we have not done this to any other nation. We have not conquered anyone. We have not grabbed their land, their culture, their history or tried to enforce our way of life on them. Why? 
+Because we respect the freedom of others. That is why my first vision is that of FREEDOM.I believe that India got its first vision of this in 1857, when we started the war of independence. It is this freedom that we must protect and nurture and build-up. If we are not free, no one will respect us. Second vision for India is DEVELOPMENT.
+For fifty years we have been a developing nation. It is time we see ourselves as a developed nation. We are among top 5 nations of the world in terms of GDP. We have 10 percent growth rate in most areas. Our poverty levels are falling, our achievements are being globally recognized today. Yet we lack the self-confidence to see ourselves as a developed nation, self reliant and self assured. Isn't this right?
+I have a third vision, that India must stand up to the world. because I believe that unless India stands up to the world, no one will respect us. 
+Only strength respects strength. We must be strong not only as a military power but also as an economic power. Both must go hand-in-hand.
+My good fortune was to have worked with three great minds i.e. Dr Vikram Sarabhai of the Dept. of space, Professor Satish Dhawan, who succeeded him, and Dr.Brahm Prakash, father of nuclear material. I was lucky to have worked with all three of them closely and consider this the great opportunity of my life. See four milestones in my career"""
+
+#42 PARTS OF SPEECH TAGS IN NLTK
+
+"Taj Mahal is a beautiful monument"
+
+import nltk
+sentences = nltk.sent_tokenize(paragraph)
+
+print(sentences)
+
+#Remove stopwords and then apply POS tagging
+
+from nltk.corpus import stopwords
+sentences = nltk.sent_tokenize(paragraph)
+
+#We will find out the POS tag
+
+#POS tag takes list of words
+
+nltk.download('averaged_perceptron_tagger_eng')
+
+for i in range(len(sentences)):
+    words = nltk.word_tokenize(sentences[i])
+    words = [word for word in words if word not in set(stopwords.words('english'))] ##Removing stopwords
+    poss_tag = nltk.pos_tag(words) ##POS tagging the remaining words in the sentences
+    print(poss_tag)
+
+print(nltk.pos_tag("Taj Mahal is a beautiful monument".split()))
+
+#43 Name Entity Recognition
+
+sentence = "The Effiel Tower was built from 1887 to 1889 by French engineer Gustave Eiffel, whose company specialized in building metal frameworks and structures"
+
+import nltk
+words = nltk.word_tokenize(sentence)
+
+tag_elements = nltk.pos_tag(words)
+
+nltk.download('maxent_ne_chunker')
+nltk.download('maxent_ne_chunker_tab')
+nltk.download('words')
+
+nltk.ne_chunk(tag_elements).pretty_print() ##You will get the named entities in the sentence like Effiel Tower, French, Gustave Eiffel etc. which are the named entities in the sentence.
+
+#======================================
+#Conversion of text to features/vectors
+#======================================
+
+#45. One HOT ENCODING - Count is only 0 or 1 (Overfitting, Fix size input, no semantic meaning, OOV - Out of Vocabulary)
+#46. BOW Bag of Words - Count can be increased to 2 or 3 (Sparse matrix, Order of word changes, OOV - Out of Vocabulary)
+
+#BAG OF WORDS PRACTICAL
+
+import pandas as pd
+messages = pd.read_csv("D:\\nowWereTalking\\AI\\GenerativeAIWithLangChainAndHuggingFace\\S10_MachineLearningForNLP\\SMSSpamCollection.txt", sep='\t', names=['label','message'])
+
+#Data Cleaning and Preprocessing
+import re
+import nltk
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
+from nltk.stem.porter import PorterStemmer
+ps = PorterStemmer()
+
+corpus = []
+for i in range(0, len(messages)):
+    review = re.sub('[^a-zA-Z]', ' ', messages['message'][i]) ##Removing all the special characters and numbers from the message and keeping only the alphabets
+    review = review.lower() ##Converting all the characters to lower case
+    review = review.split() ##Splitting the message into words
+    review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))] ##Removing all the stopwords from the message and applying stemming to the remaining words
+    review = ' '.join(review) ##Joining all the words in the message to form a single string
+    corpus.append(review) ##Appending the cleaned message to the corpus
+    
+#Creating the Bag of Words model
+
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(max_features=2500) ##Creating a CountVectorizer object with
+
+X = cv.fit_transform(corpus).toarray() ##Fitting the CountVectorizer object to the corpus and transforming the corpus into a sparse matrix
+
+print(X)
+
+#51. APPLYING NGRAMS - It is a contiguous sequence of n items from a given sample of text or speech. The items can be phonemes, syllables, letters, words or base pairs according to the application. The n-grams typically are collected from a text or speech corpus. When the items are words, n-grams may also be called shingles.
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+cv = CountVectorizer(max_features=500, ngram_range=(1,2)) ##Creating a CountVectorizer object with max_features as 100 and ngram_range as (1,2) which means we want to consider both unigrams and bigrams
+
+X = cv.fit_transform(corpus).toarray() ##Fitting the CountVectorizer object to the corpus and transforming the corpus into a sparse matrix
+
+print("This is the n-gram representation:", cv.vocabulary_)
